@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WikiPulse – live edits on Wikimedia</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232a78d6'/%3E%3Cpath d='M4 17h6l3-8 5 15 3-7h7' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
+    />
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>WikiPulse</h1>
+        <p class="hint">Live edits across all Wikimedia wikis</p>
+      </div>
+      <p id="status" class="status">Connecting…</p>
+    </header>
+
+    <main>
+      <section class="numbers">
+        <div class="tile">
+          <p class="hint">Changes per second</p>
+          <p class="value" id="per-second">–</p>
+        </div>
+        <div class="tile">
+          <p class="hint">Bot share (5 min)</p>
+          <p class="value" id="bot-share">–</p>
+        </div>
+        <div class="tile">
+          <p class="hint">New pages (5 min)</p>
+          <p class="value" id="new-pages">–</p>
+        </div>
+        <div class="tile">
+          <p class="hint">Active wikis (5 min)</p>
+          <p class="value" id="active-wikis">–</p>
+        </div>
+      </section>
+
+      <section class="card wide">
+        <h2>Changes per second</h2>
+        <p class="hint">Last 60 seconds, edits by people and by bots</p>
+        <div class="chart">
+          <canvas id="rate-chart" role="img" aria-label="Line chart: changes per second by people and bots"></canvas>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Most active wikis</h2>
+        <p class="hint">Changes in the last 5 minutes</p>
+        <div class="chart">
+          <canvas id="wiki-chart" role="img" aria-label="Bar chart: the ten wikis with the most changes"></canvas>
+        </div>
+      </section>
+
+      <section class="card wide">
+        <div class="card-head">
+          <div>
+            <h2>Live feed</h2>
+            <p class="hint">Click an edit to see details</p>
+          </div>
+          <button id="pause" type="button">Pause</button>
+        </div>
+        <div class="filters">
+          <label><input type="checkbox" id="only-articles" checked /> Only Wikipedia articles</label>
+          <label><input type="checkbox" id="hide-bots" checked /> Hide bots</label>
+        </div>
+        <ul id="feed" class="feed"></ul>
+      </section>
+
+      <section class="card">
+        <h2 id="detail-title">Page details</h2>
+        <p id="detail-meta" class="hint">
+          Click an edit in the feed. Summary and pageviews come from the Wikimedia REST API.
+        </p>
+        <a id="detail-link" href="#" target="_blank" rel="noopener" hidden>Open page ↗</a>
+        <img id="detail-image" alt="" hidden />
+        <p id="detail-description" class="description"></p>
+        <p id="detail-text"></p>
+        <div id="views" hidden>
+          <h3>Pageviews, last 30 days</h3>
+          <p id="views-total" class="hint"></p>
+          <div class="chart small">
+            <canvas id="views-chart" role="img" aria-label="Bar chart: pageviews per day"></canvas>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Data:
+      <a href="https://wikitech.wikimedia.org/wiki/Event_Platform/EventStreams_HTTP_Service">Wikimedia EventStreams</a>
+      and the <a href="https://www.mediawiki.org/wiki/Wikimedia_APIs">Wikimedia REST API</a>. Article text from
+      Wikipedia under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Not affiliated with
+      the Wikimedia Foundation.
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

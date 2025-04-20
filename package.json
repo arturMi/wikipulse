@@ -1,0 +1,21 @@
+{
+  "name": "wikipulse",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Live dashboard of edits across all Wikimedia wikis (Server-Sent Events, REST API, Chart.js)",
+  "license": "MIT",
+  "author": "Artur Miling",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --base=./",
+    "preview": "vite preview",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "chart.js": "^4.6.1"
+  },
+  "devDependencies": {
+    "vite": "^8.3.7"
+  }
+}

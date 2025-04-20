@@ -1,0 +1,225 @@
+:root {
+  --page: #f9f9f7;
+  --card: #ffffff;
+  --text: #0b0b0b;
+  --muted: #6b6a66;
+  --grid: #e1e0d9;
+  --border: #e6e5e0;
+  --people: #2a78d6;
+  --bots: #eb6834;
+  --live: #0ca30c;
+  --warning: #b07d00;
+  font-family: system-ui, sans-serif;
+  color: var(--text);
+  background: var(--page);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #0d0d0d;
+    --card: #1a1a19;
+    --text: #f0efec;
+    --muted: #a3a29c;
+    --grid: #2c2c2a;
+    --border: #2c2c2a;
+    --people: #3987e5;
+    --bots: #d95926;
+    --warning: #fab219;
+  }
+}
+
+body {
+  margin: 0 auto;
+  max-width: 1300px;
+  padding: 16px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+h3 {
+  margin: 16px 0 0;
+  font-size: 0.95rem;
+}
+
+.hint {
+  margin: 2px 0 12px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.status {
+  font-weight: 600;
+}
+
+.status.live::before {
+  content: '● ';
+  color: var(--live);
+}
+
+.status.reconnecting::before {
+  content: '▲ ';
+  color: var(--warning);
+}
+
+/* Layout: two columns on wide screens, one column on small screens */
+main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: start;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+@media (max-width: 900px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}
+
+.numbers {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.tile,
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 0;
+}
+
+.tile .hint {
+  margin: 0;
+}
+
+.value {
+  margin: 4px 0 0;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.chart {
+  position: relative;
+  height: 300px;
+}
+
+.chart.small {
+  height: 160px;
+}
+
+/* Live feed */
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+#pause {
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.filters {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.feed {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.feed button {
+  display: grid;
+  grid-template-columns: 70px 110px 1fr auto;
+  gap: 10px;
+  width: 100%;
+  padding: 6px 4px;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background: none;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.feed button:hover {
+  background: var(--page);
+}
+
+.feed .time,
+.feed .wiki,
+.feed .size {
+  color: var(--muted);
+}
+
+.feed .title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  unicode-bidi: isolate; /* right-to-left titles (e.g. Arabic) don't mix up the line */
+}
+
+/* Details */
+#detail-image {
+  float: right;
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  margin: 0 0 8px 12px;
+  border-radius: 8px;
+}
+
+.description {
+  color: var(--muted);
+}
+
+footer {
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+a {
+  color: inherit;
+}
+
+/* Small screens: hide the time column in the feed */
+@media (max-width: 600px) {
+  .feed button {
+    grid-template-columns: 100px 1fr auto;
+  }
+
+  .feed .time {
+    display: none;
+  }
+}
